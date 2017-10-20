@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>Welcome to Dojo Activity Center</h1>
+@{
+    if (TempData["Error1"] != null)
+    {
+<p style="color:red;">@TempData["Error1"]</p>
+    }
+}
+<div style="display:inline-block; width:450px;">
+@model test_project.Models.RegisterViewModel
+
+<h2>Registration</h2>
+<form asp-controller="User" asp-action="register" method="post" >
+    <label asp-for="first_name"></label><input asp-for="first_name"/><span style="color:red;" asp-validation-for="first_name"></span>
+    <label asp-for="last_name"></label><input asp-for="last_name"/><span style="color:red;" asp-validation-for="last_name"></span>
+    <label asp-for="email"></label><input asp-for="email"/><span style="color:red;" asp-validation-for="email"></span>
+    <label asp-for="password"></label><input asp-for="password"/><span style="color:red;" asp-validation-for="password"></span>
+    <label asp-for="confirm"></label><input asp-for="confirm"/><span style="color:red;" asp-validation-for="confirm"></span>
+    <p><button type="submit">Create new User</button></p>
+</form>
+</div>
+<div style="display:inline-block; vertical-align:top; width:450px;">
+@Html.Partial("LoginPartial")
+</div>

@@ -1,0 +1,13 @@
+@model test_project.Models.LoginViewModel
+@{
+    if (TempData["Error"] != null)
+    {
+<p style="color:red;">@TempData["Error"]</p>
+    }
+}
+<h2>Login</h2>
+<form asp-controller="User" asp-action="login" method="post" style="display:inline-block">
+    <label asp-for="email1"></label><input asp-for="email1"/><span style="color:red;" asp-validation-for="email1"></span>
+    <label asp-for="password1"></label><input asp-for="password1"/><span style="color:red;" asp-validation-for="password1"></span>
+    <p><button type="submit">Login</button></p>
+</form>

@@ -1,0 +1,58 @@
+<header style="display:inline-block; border-bottom:2px solid black;">
+    <h1 style="display:inline-block; width:600px;">Dojo Activity Center</h1>
+    <span style="display:inline-block;">Welcome </span>
+    <a href="/logout" style="display:inline-block; margin-left:30px;">Log Off</a>
+</header>
+<main>
+    <table>
+        <tr>
+            <th>Activity</th>
+            <th>Date and Time</th>
+            <th>Duration</th>
+            <th>Event Coordinator</th>
+            <th>Number of Participants</th>
+            <th>Actions</th>
+        </tr>
+        @{
+            foreach(var activity in @ViewBag.activities)
+            {
+                <tr>
+                    <td><a href="/display/@activity.activityid">@activity.title</a></td>
+                    <td>@activity.date.ToString("M/d") &#64; @activity.time.ToString("hh:mm tt") </td>
+                    <td>@activity.duration @activity.durationtype</td>
+                    <td>@activity.User.first_name</td>
+                    <td>@activity.participants.Count</td>
+                    <td>
+                        @if(@ViewBag.uid == @activity.userid)
+                        {
+                            <a href="/delete/@activity.activityid" >Delete</a>
+                        }
+                        else
+                        {
+                            var count = 0;
+                            @foreach(var participant in @activity.participants)
+                            {
+                                if(participant.userid == @ViewBag.uid)
+                                {
+                                    count++;
+                                }
+                            }
+                            @if(count>0)
+                            {
+                                <a href="/leaveit/@activity.activityid" >Leave</a>   
+                            }
+                            else
+                            {
+                                <a href="/joinit/@activity.activityid" >Join</a>
+                            }
+                        }       
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+</main>
+
+<a href="new" style="border:2px solid black; padding:10px; margin-left:700px; color:black; text-decoration:none;">Add New Activity! </a>

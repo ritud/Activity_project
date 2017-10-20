@@ -1,0 +1,45 @@
+<header style="display:inline-block; border-bottom:2px solid black;">
+    <h1 style="display:inline-block; width:600px;">Dojo Activity Center</h1>
+    <a href="/dashboard" style="display:inline-block;">Home </span>
+    <a href="/logout" style="display:inline-block; margin-left:30px;">Log Off</a>
+</header>
+<div style="margin-top:50px;">
+<div style=" display:inline-block; width:400px">
+<h3 style="width:300px;">@ViewBag.activity.title</h3>
+<p style="margin-left:30px;">Event Coordinator : @ViewBag.creator.first_name </p>
+<p style="margin-left:30px;">Description</p>
+<p style="margin-left:50px;">@ViewBag.activity.description</p>
+<p style="margin-left:30px;">Participants:</p>
+@foreach(var participant in @ViewBag.activity.participants)
+{
+<p style="margin-left:50px;">@participant.User.first_name</p>
+}
+</div>
+<div style="display:inline-block; vertical-align:top; width:60px;">
+    
+    @if(@ViewBag.uid == @ViewBag.creator.userid)
+    {
+        <a href="/delete/@ViewBag.activity.activityid" style="border:2px solid black; padding:8px;  color:black; text-decoration:none;">Delete</a>
+    }
+    else
+    {
+        var count = 0;
+        @foreach(var participant in @ViewBag.activity.participants)
+        {
+            if(participant.userid == @ViewBag.uid)
+            {
+                count++;
+            }
+        }
+        @if(count>0)
+        {
+            <a href="/leave/@ViewBag.activity.activityid" style="border:2px solid black; padding:8px; color:black; text-decoration:none;">Leave</a>   
+        }
+        else
+        {
+            <a href="/join/@ViewBag.activity.activityid" style="border:2px solid black; padding:8px; color:black; text-decoration:none;">Join</a>
+        }
+        
+    }
+</div>
+</div>

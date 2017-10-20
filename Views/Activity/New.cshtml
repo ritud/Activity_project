@@ -1,0 +1,24 @@
+<header style="display:inline-block; border-bottom:2px solid black;">
+    <h1 style="display:inline-block; width:600px;">Dojo Activity Center</h1>
+    <a href="/dashboard" style="display:inline-block;">Home </span>
+    <a href="/logout" style="display:inline-block; margin-left:30px;">Log Off</a>
+</header>
+<main>
+    <h3>Create An Activity!</h3>
+    @model test_project.Models.Activity
+
+<form asp-controller="Activity" asp-action="add" method="post" >
+    <label asp-for="title"></label><input asp-for="title"/><span style="color:red;" asp-validation-for="title"></span>
+    <label asp-for="date"></label><input asp-for="date"/><span style="color:red;" asp-validation-for="date"></span>
+    <label asp-for="time"></label><input asp-for="time"/><span style="color:red;" asp-validation-for="time"></span>
+    <label asp-for="duration"></label><input asp-for="duration"/><span style="color:red;" asp-validation-for="duration"></span>
+    <br>
+    <select name="durationtype">
+        <option value="Days">Days</option>
+        <option value="Hours">Hours</option>
+        <option value="Minutes">Minutes</option>
+    </select>
+    <label asp-for="description"></label><textarea asp-for="description" columns="40" rows="4"/></textarea><span style="color:red;" asp-validation-for="description"></span>
+    <p><input type="submit" value="Create Activity"></p>
+</form>
+</main>
